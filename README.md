@@ -81,6 +81,12 @@ The layout is made with KiCad but I have also included an screenshot of the sche
   <td></td>
   <td>1</td>
 </tr>
+ <tr>
+  <td>8</td>
+  <td>30V Single N-Channel Power MOSFET</td>
+  <td>TO-220</td>
+  <td>1</td>
+</tr>
 </table>
 
 ### Schematic
