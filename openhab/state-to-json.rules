@@ -1,0 +1,23 @@
+//put this file in your /etc/openhab2/rules folder
+rule "State to JSON"
+	when
+		Item AquariumLight1Dimmer received command
+	then
+		val SwitchNum = if (AquariumLight1Dimmer.state == 0) 0 else 1
+		var jsonString = "{\"On\":" + SwitchNum
+		jsonString = jsonString + "}"
+
+		AquariumLight1.sendCommand(jsonString)
+
+end
+
+rule "Brightness to JSON"
+	when
+		Item AquariumLight1Dimmer received command
+	then
+		var jsonString = "{\"Brightness\":" + AquariumLight1Dimmer.state.toString
+		jsonString = jsonString + "}"
+
+		AquariumLight1.sendCommand(jsonString)
+
+end
