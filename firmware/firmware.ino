@@ -2,13 +2,13 @@
 #include "Adafruit_MQTT.h"
 #include "Adafruit_MQTT_Client.h"
 
-#define WLAN_SSID   "YOUR SSID"
-#define WLAN_PASS   "YOUR PASSWORD"
+#define WLAN_SSID   "WLAN SSID"
+#define WLAN_PASS   "WLAN PSK"
 
-#define SERVER      "minibian" // The hostname of the server where the MQTT broker is installed
+#define SERVER      "host" // The hostname of the server where the MQTT broker is installed
 #define SERVERPORT  1883 // The port of the MQTT broker
 
-#define LED         4   // Pin controlling to the LED strip.
+#define LED         0   // Pin controlling to the LED strip.
 
 
 unsigned int i = 0;
@@ -19,8 +19,8 @@ bool led_on = false;
 WiFiClient client;
 
 Adafruit_MQTT_Client mqtt(&client, SERVER, SERVERPORT);
-Adafruit_MQTT_Subscribe onoffsw = Adafruit_MQTT_Subscribe(&mqtt, "/light/1");
-Adafruit_MQTT_Publish status_mqtt = Adafruit_MQTT_Publish(&mqtt, "/light/1/status");
+Adafruit_MQTT_Subscribe onoffsw = Adafruit_MQTT_Subscribe(&mqtt, "home/out/AquariumLight1/command");
+Adafruit_MQTT_Publish status_mqtt = Adafruit_MQTT_Publish(&mqtt, "home/in/AquariumLight1/state");
 
 void setup() {
   // Initialization
@@ -32,8 +32,8 @@ void setup() {
 
   // We start by connecting to a WiFi network
   Serial.print("Connecting to ");
-  Serial.println(ssid);
-  WiFi.begin(ssid, pass);
+  Serial.println(WLAN_SSID);
+  WiFi.begin(WLAN_SSID, WLAN_PASS);
   
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
